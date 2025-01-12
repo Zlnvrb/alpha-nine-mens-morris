@@ -37,7 +37,7 @@ mcts1 = MCTS(g, n1, args1)
 n1p = lambda x: np.argmax(mcts1.getActionProb(x, temp=0))
 
 if testing:
-    arena = Arena(hp, n1, g, display=NineMensMorrisGame.display)
+    arena = Arena(hp, n1p, g, display=NineMensMorrisGame.display)
 
     print(arena.playGames(games_to_play, verbose=True))
 
