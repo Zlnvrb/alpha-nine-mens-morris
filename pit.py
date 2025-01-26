@@ -30,11 +30,11 @@ hp = HumanNineMensMorrisPlayer(g, True).play
 
 # nnet player
 n1 = NNetWrapper(g)
-n1.load_checkpoint('./models/',
-                   'best_model.pth.tar')
-args1 = dotdict({'numMCTSSims': 50, 'cpuct': 1.41})
+n1.load_checkpoint('./trained_model_30_iter/',
+                   'best.pth.tar')
+args1 = dotdict({'numMCTSSims': 30, 'cpuct': 1.2})
 mcts1 = MCTS(g, n1, args1)
-n1p = lambda x: np.argmax(mcts1.getActionProb(x, temp=0))
+n1p = lambda x: np.argmax(mcts1.getActionProb(x, temp=10))
 
 if testing:
     arena = Arena(hp, n1p, g, display=NineMensMorrisGame.display)
@@ -53,11 +53,11 @@ else:
         file_name = "outputGreedy.txt"
     else:
         n2 = NNetWrapper(g)
-        n2.load_checkpoint('./models/',
-                   'best_model.pth.tar')
-        args2 = dotdict({'numMCTSSims': 50, 'cpuct': 1.0})
+        n2.load_checkpoint('./trained_model_30_iter/',
+                   'best.pth.tar')
+        args2 = dotdict({'numMCTSSims': 30, 'cpuct': 1.2})
         mcts2 = MCTS(g, n2, args2)
-        n2p = lambda x: np.argmax(mcts2.getActionProb(x, temp=0))
+        n2p = lambda x: np.argmax(mcts2.getActionProb(x, temp=10))
 
         player2 = n2p
         file_name = "outputModel.txt"
